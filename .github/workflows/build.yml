@@ -21,4 +21,5 @@ jobs:
           cmake;3.18.1
         cache: true
     - uses: gradle/gradle-build-action@v2
-    - run: ./gradlew assembleDebug
+      with:
+        arguments: assembleDebug
