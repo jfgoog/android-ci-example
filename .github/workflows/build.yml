@@ -14,6 +14,7 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: '11'
+        cache: 'gradle'
     - name: Install Android SDKs
       uses: maxim-lobanov/setup-android-tools@v1
       with:
@@ -22,15 +23,16 @@ jobs:
           ndk;25.1.8937393
           cmake;3.18.1
         cache: true
-    - name: Build debug APK
-      uses: gradle/gradle-build-action@v2
-      with:
-        arguments: assembleDebug
+    - name: Build Debug APK
+      run: ./gradlew --no-daemon assembleDebug
       env:
         TERM: dumb
-    - name: Lint
-      uses: gradle/gradle-build-action@v2
-      with:
-        arguments: lint
+    - name: Android Lint
+      run: ./gradlew --no-daemon lint
       env:
         TERM: dumb
+    - name: Upload lint report
+      uses: actions/upload-artifact@v2
+      with:
+        name: lint_report.html
+        path: app/build/reports/lint-results-debug.html
