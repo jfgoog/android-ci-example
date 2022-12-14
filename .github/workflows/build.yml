@@ -23,6 +23,10 @@ jobs:
           ndk;25.1.8937393
           cmake;3.18.1
         cache: true
+    - uses: actions/setup-python@v4
+      with:
+        python-version: 3.x
+    - uses: pre-commit/action@v3.0.0
     - name: Build Debug APK
       run: ./gradlew assembleDebug
       env:
