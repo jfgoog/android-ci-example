@@ -24,15 +24,15 @@ jobs:
           cmake;3.18.1
         cache: true
     - name: Build Debug APK
-      run: ./gradlew --no-daemon assembleDebug
+      run: ./gradlew assembleDebug
       env:
         TERM: dumb
     - name: Android Lint
-      run: ./gradlew --no-daemon lint
+      run: ./gradlew lint
       env:
         TERM: dumb
     - name: Upload lint report
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: lint_report.html
         path: app/build/reports/lint-results-debug.html
